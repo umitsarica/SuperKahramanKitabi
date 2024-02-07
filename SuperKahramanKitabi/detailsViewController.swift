@@ -13,10 +13,15 @@ class detailsViewController: UIViewController {
     
     @IBOutlet weak var label: UILabel!
     
+    var secilenKahramanismi = ""
+    var secilenKahramanGorselismi = ""
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
+        imageView.image = UIImage(named: secilenKahramanGorselismi)
+        label.text = secilenKahramanismi
     }
     
 

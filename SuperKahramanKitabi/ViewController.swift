@@ -8,11 +8,12 @@
 import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     @IBOutlet weak var tableView: UITableView!
     var superkahramanisimleri = [String]()
     var superkahramanGorselleri = [String]()
-    
+    var secilenisim = ""
+    var secilenGorsel = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,8 +39,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         
     }
-        //NumberofRowsInsect.on -> kaç tane row olacak
-        //cellForRow atIndexpatch -> hücrenin içerisinde neler gösterilecek
+    //NumberofRowsInsect.on -> kaç tane row olacak
+    //cellForRow atIndexpatch -> hücrenin içerisinde neler gösterilecek
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return superkahramanisimleri.count
@@ -60,10 +61,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        secilenisim = superkahramanisimleri[indexPath.row]
+        secilenGorsel = superkahramanGorselleri[indexPath.row]
         performSegue(withIdentifier: "toDetailsVC", sender: nil)
         
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toDetailsVC" {
+            let destinationVC = segue.destination as! detailsViewController
+            destinationVC.secilenKahramanismi = secilenisim
+            destinationVC.secilenKahramanGorselismi = secilenGorsel
+        }
+    }
 }
+
+
 
 
 
